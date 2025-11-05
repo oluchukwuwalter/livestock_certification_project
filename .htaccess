@@ -1,0 +1,37 @@
+Options -Indexes
+Options +FollowSymLinks
+Options -MultiViews
+DirectoryIndex index.php
+RewriteEngine on
+
+
+RewriteRule ^home/?$ index.php [NC]
+RewriteRule ^sign-in/?$ login_page.php [NC]
+RewriteRule ^admin-login/?$ ghost_pass.php [NC]
+RewriteRule ^3/?$ admin_page.php [NC]
+RewriteRule ^sign-up/?$ registration.php [NC]
+RewriteRule ^confirm-registration/?$ verify_email.php [NC]
+RewriteRule ^logout/?$ logout.php [NC]
+RewriteRule ^authenticate-user/?$ process_login.php [NC]
+RewriteRule ^payment/?$ remita_payment.php [NC]
+RewriteRule ^password/?$ reset_password.php [NC]
+RewriteRule ^myAccount/?$ myAccount_information_page.php [NC]
+RewriteRule ^welcome?/?$ welcome_page.php [NC]
+RewriteRule ^help/?$ help.php [NC]
+RewriteRule ^13/?$ import_application_permit.php [NC]
+RewriteRule ^14/?$ import_permit_application_animal_vaccine_infectious_agents.php [NC]
+RewriteRule ^15/?$ import_permit_application_live_animal.php [NC]
+RewriteRule ^16/?$ import_permit_application_live_animal_export_forml.php [NC]
+RewriteRule ^17/?$ import_permit_application_products_and_bye_products_animal.php [NC]
+RewriteRule ^18/?$ choose_service_provider.php [NC]
+RewriteRule ^payment/?$ remita_payment.php [NC]
+RewriteRule ^authenticate-admin/?$ process_admin.php [NC]
+RewriteRule ^logout-admin/?$ logout_admin.php [NC]
+
+
+
+
+#ErrorDocument 404 /404.php
+#ErrorDocument 500 /index.php/500/
+#RewriteRule ^(.*)$ admin_login.php?/$1 [NC,L,QSA]
+#RewriteRule ^(.*)$ admin_login.php/$1 [NC,L,QSA]
