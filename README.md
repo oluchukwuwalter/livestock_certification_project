@@ -1,86 +1,125 @@
-# Yamm
+# NAQS Portal – Nigeria Agricultural Quarantine System
 
+## Overview
+**NAQS Portal** is a web-based platform developed to digitize and streamline the Nigeria Agricultural Quarantine System.  
+The portal connects exporters, service providers, and administrators to efficiently manage sanitary and phytosanitary certifications for plants, animals, and agricultural products, ensuring compliance with national and international regulations.
 
-This is *Yet another megamenu for [Bootstrap 3](http://getbootstrap.com/)* from Twitter.   
-   
-Lightweight and pure CSS megamenu that uses the standard navbar markup and the fluid grid system classes from Bootstrap 3. Work for fixed and responsive layout and has the facility to include (almost) any Bootstrap elements.
+The portal automates user registration, certificate application, service provider selection, and tracking while providing help desk support, notifications, and secure authentication.
 
-####[Demo](http://geedmo.github.io/yamm3)
+---
 
-### Markup
+## Core Features
 
-1. Reuse navbar markup and add class `.yamm` at the top.
+### 👤 User Registration & Authentication
+- Exporters, service providers, and administrators can register and log in securely.
+- Role-based access ensures appropriate permissions for each user type.
+- Forgot password and account recovery functionality.
 
-2. Then add your markup into the `.dropdown-menu`
+### 📄 Certificate Application & Tracking
+- Users can submit applications for phytosanitary and veterinary certificates.
+- Portal validates applications and assigns the relevant service providers automatically.
+- Track application status in real time.
 
-3. Optionally use `.yamm-content` to wrap content with padding.
+### 🏢 Service Provider Management
+- Registered service providers can view and manage assigned tasks.
+- Exporters are automatically linked to approved service providers based on application requirements.
 
-Example
+### 💬 Help & Support
+- In-built help desk with contact details and guidance for users.
+- FAQs to provide quick support for common issues.
+- Support ticket system to handle complaints and queries.
 
-    <nav class="navbar yamm navbar-default " role="navigation">
-        ...
-        <ul class="nav navbar-nav">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <div class="yamm-content">
-                        <div class="row"> 
-                            ...
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        ...
-    </nav>
+### 🔔 Notifications
+- System alerts users about status updates, approvals, and pending actions.
 
+### 📊 Dashboard
+- Role-based dashboards for exporters, service providers, and administrators.
+- View ongoing applications, certificate statuses, and completed tasks.
 
-### Fullwidth
+---
 
-By default every mega-dropdown will take the content size so is possible to use add `.yamm-fw` to `.dropdown` to expand it fullwidth.  
-Yamm works better with fullwidth menus.
+## System Workflow (High Level)
 
-Example
+1. User registers as an exporter or service provider.
+2. Exporter submits application for quarantine/certification.
+3. System assigns appropriate service provider(s) based on requirements.
+4. Service provider processes the request, updates milestones/status.
+5. Exporter tracks application progress in the portal.
+6. Notifications alert users about updates or required actions.
+7. Certificate is issued once all compliance checks are completed.
 
-    <nav class="navbar yamm navbar-default " role="navigation">
-    ...
-         <ul class="nav navbar-nav">
-           <li class="dropdown yamm-fw">
-                 ...
-           </li>
-         </ul>
-    ...
-    </nav>
+---
 
+## Database Schema Design (Simplified)
 
-### Javascript
+### Users Table
+- `id` (PK)
+- `first_name`
+- `last_name`
+- `email` (unique)
+- `password`
+- `role` (exporter | service_provider | admin)
+- `created_at`
+- `updated_at`
 
-If necessary, this code will prevent unexpected menu close when using some components (like accordion, forms, etc)
+### Applications Table
+- `id` (PK)
+- `user_id` (FK -> users.id)
+- `application_type` (phytosanitary | veterinary | other)
+- `status` (pending | in_progress | approved | rejected)
+- `assigned_service_provider` (FK -> users.id)
+- `submitted_at`
+- `updated_at`
 
-    $(document).on('click', '.yamm .dropdown-menu', function(e) {
-       e.stopPropagation()
-    })
+### Service_Providers Table
+- `id` (PK)
+- `user_id` (FK -> users.id)
+- `service_type`
+- `contact_info`
+- `assigned_applications_count`
 
+### Messages Table
+- `id` (PK)
+- `sender_id` (FK -> users.id)
+- `receiver_id` (FK -> users.id)
+- `subject`
+- `message_body`
+- `is_read`
+- `created_at`
 
-### Install via composer
+---
 
-	{ 
-		"require": {
-			"geedmo/yamm3": "dev-master"
-		}
-	}
+## Technology Stack
+- Backend: PHP / Laravel
+- Frontend: HTML, CSS, JavaScript, Bootstrap
+- Database: MySQL
+- Authentication: Role-based access control
+- Notifications: System-generated alerts
 
-### Compile
+---
 
-Run the following commands in the repository folder
+## Use Cases
+- Digitizing agricultural quarantine processes
+- Linking exporters with certified service providers
+- Ensuring compliance with international phytosanitary and veterinary standards
+- Streamlining application and certificate issuance workflow
 
-- npm install
-- gulp
+---
 
-To compile yamm with demo
+## Future Enhancements
+- Real-time messaging and notifications
+- Mobile app integration for exporters and service providers
+- Advanced reporting and analytics
+- Integration with international trade compliance APIs
 
-- gulp demo
+---
 
-### License
+## Author
+**Ugwueze Walter Oluchukwu**  
+Web Developer  
+oluchukwuwalter
 
-- Licenced under MIT - [details here](LICENSE.txt)
+---
+
+## License
+This project is developed for demonstration and portfolio purposes.
